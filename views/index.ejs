@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>ALL Chats in ChatBot</h2>
+    <br><br>
+    <form action="/chats/new" method="get">
+        <button>New Chat</button>
+    </form>
+    <br><br>
+    <div class="container">
+        <% for(let chat of chats) { %>
+            <div class="chatbox">
+                <p class="from">From : <i><%= chat.from %></i>
+                </p>
+                <div class="message">
+                    <p>msg : <%= chat.msg %>
+                    </p>
+                </div>
+                <p class="to">To :<i> <%= chat.to %></i>
+                </p>
+                <hr>
+            </div>
+            <br>
+            <% } %>
+    </div>
+    <br>
+</body>
+
+</html>

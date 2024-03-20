@@ -1,3 +1,7 @@
+body {
+    background-color: #ADB5BD;
+}
+
 .container {
     margin-left: 15px;
 }
@@ -16,4 +20,28 @@
     color: white;
     padding: 15px;
     border-radius: 5px;
+}
+
+.chatBot {
+    position: fixed;
+    top: 40%;
+    right: 20%;
+    background-color: #212529;
+    height: 10vw;
+    width: 20vw;
+    border-radius: 10%;
+    border: 4px black solid;
+}
+#bot {
+    display: flex;
+    justify-content: center;
+    color: #F8F9FA;
+    padding: 30px;
+}
+
+.msg {
+    position: fixed;
+    top: 65%;
+    right: 22%;
+    color: rgb(1, 36, 14);
 }

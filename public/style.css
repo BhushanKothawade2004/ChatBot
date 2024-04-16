@@ -53,3 +53,13 @@ body {
 .edit {
     display: inline-block;
 }
+
+#chat-heading {
+    align-items: center;
+}
+
+.head-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

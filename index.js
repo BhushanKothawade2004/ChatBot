@@ -3,8 +3,9 @@ const app = express();
 const mongoose = require("mongoose");
 const Chat = require("./models/chat.js");
 const methodOverride = require("method-override");
-const port = 8080;
 const path = require("path");
+const ExpressError = require("./ExpressError.js")
+const port = 8080;
 
 app.set("view-engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -67,6 +68,7 @@ app.get("/chats/:id/edit", async (req, res) => {
     let chat = await Chat.findById(id);
     res.render("edit.ejs", { chat });
 });
+
 //Put Route
 app.put("/chats/:id",async (req, res) => {
     let { id } = req.params;
@@ -82,6 +84,12 @@ app.delete("/chats/:id",async (req, res) => {
     let { id } = req.params;
     let DeletedChat =await Chat.findByIdAndDelete(id);
     res.redirect("/chats");
+})
+
+//Custom Error Middleware
+app.use((err, req, res, next) => {
+    let {status = 500, message = "Something Went Wrong!"}  = err;
+    res.status(status).send(message);
 })
 
 app.listen(port, () => {

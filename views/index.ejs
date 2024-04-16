@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h2>ALL Chats in ChatBot</h2>
+    <div class="head-container">
+        <h1 id="chat-heading">ALL Chats in ChatBot</h1>
+    </div>
     <div class="chatBot">
         <h1 id="bot">ChatBot</h1>
     </div>
     <h2 class="msg">chat all you want... here!</h2>
-    <br><br>             
+    <br><br>
     <form action="/chats/new" method="get">
         <button>New Chat</button>
     </form>
@@ -20,23 +24,30 @@
     <div class="container">
         <% for(let chat of chats) { %>
             <div class="chatbox">
-                <p class="from">From : <i><%= chat.from %></i>
+                <p class="from">From : <i>
+                        <%= chat.from %>
+                    </i>
                 </p>
                 <div class="message">
-                    <p>msg : <%= chat.msg %></p>
+                    <p>msg : <%= chat.msg %>
+                    </p>
                     <form class="edit" action="/chats/<%= chat._id %>/edit" method="get">
                         <button>Edit</button>
                     </form>
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                        <form class="delete" action="/chats/<%= chat._id %>?_method=DELETE" method="post">
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    <form class="delete" action="/chats/<%= chat._id %>?_method=DELETE" method="post">
                         <button>Delete</button>
                     </form>
                 </div>
-                <p class="to">To :<i> <%= chat.to %></i>
+                <p class="to">To :<i>
+                        <%= chat.to %>
+                    </i>
                 </p>
                 <hr>
-                <p><%= chat.created_at.toString().split(" ")[4] %></p>
-                <p><%= chat.created_at.toString().split(" ").slice(0, 4).join("-")%></p>
+                <p>
+                    <%= chat.created_at.toString().split(" ")[4] %></p>
+                <p><%= chat.created_at.toString().split(" ").slice(0, 4).join(" -")%>
+                </p>
             </div>
             <br>
             <% } %>

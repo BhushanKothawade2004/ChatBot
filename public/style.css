@@ -54,6 +54,10 @@ body {
     display: inline-block;
 }
 
+.show {
+    display: inline-block;
+}
+
 #chat-heading {
     align-items: center;
 }

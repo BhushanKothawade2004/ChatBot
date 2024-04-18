@@ -43,30 +43,45 @@ app.get("/chats/new", (req, res) => {
 });
 
 //post 
-app.post("/chats", (req, res) => {
-    let { from, to, msg } = req.body;
-    let newChat = new Chat({
-        from: from,
-        msg: msg,
-        to: to,
-        created_at: new Date(),
-    });
-
-    newChat.save()
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
+app.post("/chats", async(req, res, next) => {
+    try{
+        let { from, to, msg } = req.body;
+        let newChat = new Chat({
+            from: from,
+            msg: msg,
+            to: to,
+            created_at: new Date(),
         });
-    res.redirect("/chats");
+        await newChat.save()
+        res.redirect("/chats");
+    } catch(err) {
+        next(err);
+    } 
 });
 
 //Edit Route
-app.get("/chats/:id/edit", async (req, res) => {
-    let { id } = req.params;
-    let chat = await Chat.findById(id);
-    res.render("edit.ejs", { chat });
+app.get("/chats/:id/edit", async (req, res, next) => {
+    try {
+        let { id } = req.params;
+        let chat = await Chat.findById(id); 
+        res.render("edit.ejs", { chat });
+    } catch(err) {
+        next(err);
+    }
+});
+
+//Show route 
+app.get("/chats/:id", async(req, res, next) => {
+    try {
+        let { id } = req.params;
+        let chat = await Chat.findById(id);  
+        if(!chat ) {
+            next(new ExpressError(404, "Chat not found"));  
+        }
+        res.render("show.ejs", { chat }); 
+    } catch(err) {
+        next(err);
+    }
 });
 
 //Put Route
